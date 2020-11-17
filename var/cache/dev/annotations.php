@@ -125,29 +125,29 @@ return [[
 '%5B%5BC%5DApp%5CEntity%5CProfil%23addUser%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CProfil%23removeUser%5D%5B1%5D' => 1,
 '%5B%5BC%5DApp%5CEntity%5CProfil%23removeUser%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CProfil%24id%5D%5B1%5D' => 4,
+'%5BApp%5CEntity%5CProfil%24id%5D%5B1%5D' => 8,
 '%5B%5BC%5DApp%5CEntity%5CProfil%24id%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CProfil%24libelle%5D%5B1%5D' => 8,
+'%5BApp%5CEntity%5CProfil%24libelle%5D%5B1%5D' => 9,
 '%5B%5BC%5DApp%5CEntity%5CProfil%24libelle%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CProfil%24users%5D%5B1%5D' => 9,
+'%5BApp%5CEntity%5CProfil%24users%5D%5B1%5D' => 10,
 '%5B%5BC%5DApp%5CEntity%5CProfil%24users%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUser%5D%5B1%5D' => 10,
+'%5BApp%5CEntity%5CUser%5D%5B1%5D' => 11,
 '%5B%5BC%5DApp%5CEntity%5CUser%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CUser%23getId%5D%5B1%5D' => 1,
 '%5B%5BC%5DApp%5CEntity%5CUser%23getId%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CUser%24id%5D%5B1%5D' => 4,
 '%5B%5BC%5DApp%5CEntity%5CUser%24id%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUser%24email%5D%5B1%5D' => 11,
+'%5BApp%5CEntity%5CUser%24email%5D%5B1%5D' => 12,
 '%5B%5BC%5DApp%5CEntity%5CUser%24email%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CUser%24roles%5D%5B1%5D' => 1,
 '%5B%5BC%5DApp%5CEntity%5CUser%24roles%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUser%24password%5D%5B1%5D' => 12,
+'%5BApp%5CEntity%5CUser%24password%5D%5B1%5D' => 13,
 '%5B%5BC%5DApp%5CEntity%5CUser%24password%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUser%24profil%5D%5B1%5D' => 13,
+'%5BApp%5CEntity%5CUser%24profil%5D%5B1%5D' => 14,
 '%5B%5BC%5DApp%5CEntity%5CUser%24profil%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUser%24firstname%5D%5B1%5D' => 8,
+'%5BApp%5CEntity%5CUser%24firstname%5D%5B1%5D' => 15,
 '%5B%5BC%5DApp%5CEntity%5CUser%24firstname%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUser%24lastname%5D%5B1%5D' => 8,
+'%5BApp%5CEntity%5CUser%24lastname%5D%5B1%5D' => 15,
 '%5B%5BC%5DApp%5CEntity%5CUser%24lastname%5D%5B1%5D' => 2,
 '%5BDoctrine%5CBundle%5CDoctrineBundle%5CController%5CProfilerController%5D%5B1%5D' => 1,
 '%5B%5BC%5DDoctrine%5CBundle%5CDoctrineBundle%5CController%5CProfilerController%5D%5B1%5D' => 2,
@@ -622,7 +622,7 @@ return [[
 
 0 => 'N;',
 1 => [],
-2 => 1605560278,
+2 => 1605611086,
 3 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
@@ -668,18 +668,52 @@ return [[
 5 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
-            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
+            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['ApiPlatform\\Core\\Annotation\\ApiResource'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Annotation\\ApiResource')),
+            clone ($p['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
         ],
         null,
         [
             'stdClass' => [
+                'collectionOperations' => [
+                    [
+                        'liste_apprenants' => [
+                            'method' => 'get',
+                            'path' => '/apprenants',
+                            'security' => 'is_granted(\'ROLE_FORMATEUR\') or is_granted(\'ROLE_CM\')',
+                            'security_message' => 'acces non autorisé',
+                        ],
+                        'add_apprenants' => [
+                            'method' => 'post',
+                            'path' => '/apprenants',
+                            'security' => 'is_granted(\'ROLE_FORMATEUR\')',
+                            'security_message' => 'acces non autorisé',
+                        ],
+                    ],
+                ],
+                'itemOperations' => [
+                    [
+                        'show_one_apprenants' => [
+                            'method' => 'get',
+                            'path' => '/apprenants/{id}',
+                            'security' => 'is_granted(\'ROLE_FORMATEUR\') or is_granted(\'ROLE_CM\')',
+                            'security_message' => 'acces non autorisé',
+                        ],
+                        'modify_apprenant' => [
+                            'method' => 'put',
+                            'path' => '/apprenants/{id}',
+                            'security' => 'is_granted(\'ROLE_FORMATEUR\')',
+                            'security_message' => 'acces non autorisé',
+                        ],
+                    ],
+                ],
                 'repositoryClass' => [
-                    'App\\Repository\\ApprenantRepository',
+                    1 => 'App\\Repository\\ApprenantRepository',
                 ],
             ],
         ],
         [
             $o[0],
+            $o[1],
         ],
         []
     );
@@ -687,18 +721,46 @@ return [[
 6 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
-            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
+            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['ApiPlatform\\Core\\Annotation\\ApiResource'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Annotation\\ApiResource')),
+            clone ($p['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
         ],
         null,
         [
             'stdClass' => [
+                'collectionOperations' => [
+                    [
+                        'list_formateurs' => [
+                            'method' => 'get',
+                            'path' => '/formateurs',
+                            'security' => 'is_granted(\'ROLE_CM\')',
+                            'security_message' => 'acces non autorisé',
+                        ],
+                        'add_formateurs' => [
+                            'method' => 'post',
+                            'path' => '/formateurs',
+                            'security' => 'is_granted(\'ROLE_CM\')',
+                            'security_message' => 'acces non autorisé',
+                        ],
+                    ],
+                ],
+                'itemOperations' => [
+                    [
+                        'show_one_formateur' => [
+                            'method' => 'get',
+                            'path' => '/formateurs/{id}',
+                            'security' => 'is_granted(\'ROLE_CM\')',
+                            'security_message' => 'acces non autorisé',
+                        ],
+                    ],
+                ],
                 'repositoryClass' => [
-                    'App\\Repository\\FormateurRepository',
+                    1 => 'App\\Repository\\FormateurRepository',
                 ],
             ],
         ],
         [
             $o[0],
+            $o[1],
         ],
         []
     );
@@ -706,18 +768,69 @@ return [[
 7 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
-            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
+            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['ApiPlatform\\Core\\Annotation\\ApiResource'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Annotation\\ApiResource')),
+            clone ($p['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
         ],
         null,
         [
             'stdClass' => [
+                'collectionOperations' => [
+                    [
+                        'add_profil' => [
+                            'method' => 'post',
+                            'path' => '/admin/profils',
+                        ],
+                        'show_profils' => [
+                            'method' => 'GET',
+                            'path' => '/admin/profils',
+                            'normalization_context' => [
+                                'groups' => [
+                                    'profil:read',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                'itemOperations' => [
+                    [
+                        'show_one_profil' => [
+                            'method' => 'get',
+                            'path' => '/admin/profils/{id}',
+                        ],
+                        'update_profil' => [
+                            'method' => 'put',
+                            'path' => '/admin/profils/{id}',
+                        ],
+                        'archive_profil' => [
+                            'method' => 'DELETE',
+                            'path' => '/admin/profils/{id}',
+                        ],
+                    ],
+                ],
+                'attributes' => [
+                    [
+                        'security' => 'is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'Seuls les admins ont le droit d\'acces à ce ressource',
+                        'normalization_context' => [
+                            'groups' => [
+                                'profil:read',
+                            ],
+                        ],
+                        'denormalization_context' => [
+                            'groups' => [
+                                'profil:write',
+                            ],
+                        ],
+                    ],
+                ],
                 'repositoryClass' => [
-                    'App\\Repository\\ProfilRepository',
+                    1 => 'App\\Repository\\ProfilRepository',
                 ],
             ],
         ],
         [
             $o[0],
+            $o[1],
         ],
         []
     );
@@ -725,7 +838,42 @@ return [[
 8 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
-            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
+            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\Id'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Id')),
+            clone ($p['Doctrine\\ORM\\Mapping\\GeneratedValue'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\GeneratedValue')),
+            clone ($p['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
+            clone ($p['Symfony\\Component\\Serializer\\Annotation\\Groups'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Serializer\\Annotation\\Groups')),
+        ],
+        null,
+        [
+            'stdClass' => [
+                'type' => [
+                    2 => 'integer',
+                ],
+            ],
+            'Symfony\\Component\\Serializer\\Annotation\\Groups' => [
+                'groups' => [
+                    3 => [
+                        'profil:read',
+                    ],
+                ],
+            ],
+        ],
+        [
+            $o[0],
+            $o[1],
+            $o[2],
+            $o[3],
+        ],
+        []
+    );
+},
+9 => static function () {
+    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+        $o = [
+            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
+            clone ($p['Symfony\\Component\\Serializer\\Annotation\\Groups'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Serializer\\Annotation\\Groups')),
+            clone ($p['Symfony\\Component\\Validator\\Constraints\\NotBlank'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Validator\\Constraints\\NotBlank')),
+            clone ($p['Symfony\\Component\\Validator\\Constraints\\Choice'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Validator\\Constraints\\Choice')),
         ],
         null,
         [
@@ -733,15 +881,46 @@ return [[
                 'length' => [
                     255,
                 ],
+                'message' => [
+                    2 => 'Le libelle ne peut pas etre vide',
+                    'Donner un profil valide',
+                ],
+                'groups' => [
+                    2 => [
+                        'Default',
+                    ],
+                    [
+                        'Default',
+                    ],
+                ],
+                'choices' => [
+                    3 => [
+                        'ADMIN',
+                        'FORMATEUR',
+                        'CM',
+                        'APPRENANT',
+                    ],
+                ],
+            ],
+            'Symfony\\Component\\Serializer\\Annotation\\Groups' => [
+                'groups' => [
+                    1 => [
+                        'profil:read',
+                        'profil:write',
+                    ],
+                ],
             ],
         ],
         [
             $o[0],
+            $o[1],
+            $o[2],
+            $o[3],
         ],
         []
     );
 },
-9 => static function () {
+10 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
             clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\OneToMany'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\OneToMany')),
@@ -763,10 +942,11 @@ return [[
         []
     );
 },
-10 => static function () {
+11 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
-            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
+            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['ApiPlatform\\Core\\Annotation\\ApiResource'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Annotation\\ApiResource')),
+            clone ($p['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
             clone ($p['Doctrine\\ORM\\Mapping\\InheritanceType'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\InheritanceType')),
             clone ($p['Doctrine\\ORM\\Mapping\\DiscriminatorColumn'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\DiscriminatorColumn')),
             clone ($p['Doctrine\\ORM\\Mapping\\DiscriminatorMap'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\DiscriminatorMap')),
@@ -774,12 +954,58 @@ return [[
         null,
         [
             'stdClass' => [
+                'collectionOperations' => [
+                    [
+                        'liste_users' => [
+                            'method' => 'get',
+                            'path' => '/admin/users',
+                            'security' => 'is_granted(\'ROLE_ADMIN\')',
+                            'security_message' => 'Accès refusé',
+                        ],
+                    ],
+                ],
+                'itemOperations' => [
+                    [
+                        'get_one_user' => [
+                            'method' => 'GET',
+                            'path' => '/admin/users/{id}',
+                            'security' => 'is_granted(\'ROLE_ADMIN\')',
+                            'security_message' => 'Accès refusé',
+                        ],
+                        'put_one_user' => [
+                            'method' => 'PUT',
+                            'path' => '/admin/users/{id}',
+                            'security' => 'is_granted(\'ROLE_ADMIN\')',
+                            'security_message' => 'Accès refusé',
+                        ],
+                        'archive_user' => [
+                            'method' => 'DELETE',
+                            'path' => '/admin/users/{id}',
+                            'security' => 'is_granted(\'ROLE_ADMIN\')',
+                            'security_message' => 'Accès refusé',
+                        ],
+                    ],
+                ],
+                'attributes' => [
+                    [
+                        'denormalization_context' => [
+                            'groups' => [
+                                'user:write',
+                            ],
+                        ],
+                        'normalization_context' => [
+                            'groups' => [
+                                'user:read',
+                            ],
+                        ],
+                    ],
+                ],
                 'repositoryClass' => [
-                    'App\\Repository\\UserRepository',
+                    1 => 'App\\Repository\\UserRepository',
                 ],
                 'value' => [
-                    1 => 'SINGLE_TABLE',
-                    3 => [
+                    2 => 'SINGLE_TABLE',
+                    4 => [
                         'user' => 'User',
                         'admin' => 'Admin',
                         'formateur' => 'Formateur',
@@ -787,10 +1013,10 @@ return [[
                     ],
                 ],
                 'name' => [
-                    2 => 'discriminator',
+                    3 => 'discriminator',
                 ],
                 'type' => [
-                    2 => 'string',
+                    3 => 'string',
                 ],
             ],
         ],
@@ -799,11 +1025,12 @@ return [[
             $o[1],
             $o[2],
             $o[3],
+            $o[4],
         ],
         []
     );
 },
-11 => static function () {
+12 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
             clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
@@ -825,7 +1052,7 @@ return [[
         []
     );
 },
-12 => static function () {
+13 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
             clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
@@ -838,7 +1065,7 @@ return [[
         []
     );
 },
-13 => static function () {
+14 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
             clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ManyToOne'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ManyToOne')),
@@ -861,6 +1088,25 @@ return [[
         [
             $o[0],
             $o[1],
+        ],
+        []
+    );
+},
+15 => static function () {
+    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+        $o = [
+            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
+        ],
+        null,
+        [
+            'stdClass' => [
+                'length' => [
+                    255,
+                ],
+            ],
+        ],
+        [
+            $o[0],
         ],
         []
     );

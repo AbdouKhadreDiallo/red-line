@@ -1,0 +1,32 @@
+<?php //property_metadata_013b74eb39634fe0ebd02807388d9f49
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['ApiPlatform\\Core\\Metadata\\Property\\PropertyMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Metadata\\Property\\PropertyMetadata')),
+    ],
+    null,
+    [
+        'ApiPlatform\\Core\\Metadata\\Property\\PropertyMetadata' => [
+            'readable' => [
+                false,
+            ],
+            'writable' => [
+                false,
+            ],
+            'required' => [
+                false,
+            ],
+            'identifier' => [
+                false,
+            ],
+            'childInherited' => [
+                'App\\Entity\\Formateur',
+            ],
+            'initializable' => [
+                false,
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

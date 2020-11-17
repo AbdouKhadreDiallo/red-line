@@ -2,18 +2,69 @@
 
 return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
     $o = [
-        clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['ApiPlatform\\Core\\Annotation\\ApiResource'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Annotation\\ApiResource')),
+        clone ($p['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
     ],
     null,
     [
         'stdClass' => [
+            'collectionOperations' => [
+                [
+                    'add_profil' => [
+                        'method' => 'post',
+                        'path' => '/admin/profils',
+                    ],
+                    'show_profils' => [
+                        'method' => 'GET',
+                        'path' => '/admin/profils',
+                        'normalization_context' => [
+                            'groups' => [
+                                'profil:read',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'itemOperations' => [
+                [
+                    'show_one_profil' => [
+                        'method' => 'get',
+                        'path' => '/admin/profils/{id}',
+                    ],
+                    'update_profil' => [
+                        'method' => 'put',
+                        'path' => '/admin/profils/{id}',
+                    ],
+                    'archive_profil' => [
+                        'method' => 'DELETE',
+                        'path' => '/admin/profils/{id}',
+                    ],
+                ],
+            ],
+            'attributes' => [
+                [
+                    'security' => 'is_granted(\'ROLE_ADMIN\')',
+                    'security_message' => 'Seuls les admins ont le droit d\'acces à ce ressource',
+                    'normalization_context' => [
+                        'groups' => [
+                            'profil:read',
+                        ],
+                    ],
+                    'denormalization_context' => [
+                        'groups' => [
+                            'profil:write',
+                        ],
+                    ],
+                ],
+            ],
             'repositoryClass' => [
-                'App\\Repository\\ProfilRepository',
+                1 => 'App\\Repository\\ProfilRepository',
             ],
         ],
     ],
     [
         $o[0],
+        $o[1],
     ],
     []
 ); }];

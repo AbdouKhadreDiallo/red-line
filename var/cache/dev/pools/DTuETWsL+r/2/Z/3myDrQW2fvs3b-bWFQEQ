@@ -2,7 +2,8 @@
 
 return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
     $o = [
-        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['ApiPlatform\\Core\\Annotation\\ApiResource'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Annotation\\ApiResource')),
+        clone ($p['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
         clone ($p['Doctrine\\ORM\\Mapping\\InheritanceType'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\InheritanceType')),
         clone ($p['Doctrine\\ORM\\Mapping\\DiscriminatorColumn'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\DiscriminatorColumn')),
         clone ($p['Doctrine\\ORM\\Mapping\\DiscriminatorMap'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\DiscriminatorMap')),
@@ -10,12 +11,58 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
     null,
     [
         'stdClass' => [
+            'collectionOperations' => [
+                [
+                    'liste_users' => [
+                        'method' => 'get',
+                        'path' => '/admin/users',
+                        'security' => 'is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'Accès refusé',
+                    ],
+                ],
+            ],
+            'itemOperations' => [
+                [
+                    'get_one_user' => [
+                        'method' => 'GET',
+                        'path' => '/admin/users/{id}',
+                        'security' => 'is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'Accès refusé',
+                    ],
+                    'put_one_user' => [
+                        'method' => 'PUT',
+                        'path' => '/admin/users/{id}',
+                        'security' => 'is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'Accès refusé',
+                    ],
+                    'archive_user' => [
+                        'method' => 'DELETE',
+                        'path' => '/admin/users/{id}',
+                        'security' => 'is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'Accès refusé',
+                    ],
+                ],
+            ],
+            'attributes' => [
+                [
+                    'denormalization_context' => [
+                        'groups' => [
+                            'user:write',
+                        ],
+                    ],
+                    'normalization_context' => [
+                        'groups' => [
+                            'user:read',
+                        ],
+                    ],
+                ],
+            ],
             'repositoryClass' => [
-                'App\\Repository\\UserRepository',
+                1 => 'App\\Repository\\UserRepository',
             ],
             'value' => [
-                1 => 'SINGLE_TABLE',
-                3 => [
+                2 => 'SINGLE_TABLE',
+                4 => [
                     'user' => 'User',
                     'admin' => 'Admin',
                     'formateur' => 'Formateur',
@@ -23,10 +70,10 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                 ],
             ],
             'name' => [
-                2 => 'discriminator',
+                3 => 'discriminator',
             ],
             'type' => [
-                2 => 'string',
+                3 => 'string',
             ],
         ],
     ],
@@ -35,6 +82,7 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
         $o[1],
         $o[2],
         $o[3],
+        $o[4],
     ],
     []
 ); }];

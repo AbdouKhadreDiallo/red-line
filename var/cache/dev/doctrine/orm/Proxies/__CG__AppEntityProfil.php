@@ -66,10 +66,10 @@ class Profil extends \App\Entity\Profil implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Profil' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Profil' . "\0" . 'libelle', '' . "\0" . 'App\\Entity\\Profil' . "\0" . 'users'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Profil' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Profil' . "\0" . 'libelle', '' . "\0" . 'App\\Entity\\Profil' . "\0" . 'users', '' . "\0" . 'App\\Entity\\Profil' . "\0" . 'isDeleted'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Profil' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Profil' . "\0" . 'libelle', '' . "\0" . 'App\\Entity\\Profil' . "\0" . 'users'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Profil' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Profil' . "\0" . 'libelle', '' . "\0" . 'App\\Entity\\Profil' . "\0" . 'users', '' . "\0" . 'App\\Entity\\Profil' . "\0" . 'isDeleted'];
     }
 
     /**
@@ -244,6 +244,28 @@ class Profil extends \App\Entity\Profil implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeUser', [$user]);
 
         return parent::removeUser($user);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getIsDeleted(): ?bool
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIsDeleted', []);
+
+        return parent::getIsDeleted();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setIsDeleted(bool $isDeleted): \App\Entity\Profil
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIsDeleted', [$isDeleted]);
+
+        return parent::setIsDeleted($isDeleted);
     }
 
 }

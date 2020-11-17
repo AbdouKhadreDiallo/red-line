@@ -11,6 +11,7 @@ class ProfileFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $profiltab = ['ADMIN', 'APPRENANT', 'CM', 'FORMATEUR'];
+        
         foreach($profiltab as $theProfil){
             $profil = new Profil;
             $profil->setLibelle($theProfil);

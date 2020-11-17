@@ -2,13 +2,50 @@
 
 namespace App\Entity;
 
+use Webmozart\Assert\Assert;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * ApiResource()
+ * @ApiResource(
+ * denormalizationContext={"groups":{"user:write"}},
+ * normalizationContext={"groups":{"user:read"}},
+ *     collectionOperations={
+ *          "liste_users"={
+ *              "method"="get",
+ *              "path"="/admin/users",
+ *              "security" = "is_granted('ROLE_ADMIN')",
+ *              "security_message" = "Accès refusé"
+ * },
+ *          
+*             },
+*           itemOperations={
+*           "get_one_user"={
+*               "method"="GET",
+*               "path"="/admin/users/{id}" ,
+ *               "security" = "is_granted('ROLE_ADMIN')",
+ *              "security_message" = "Accès refusé"
+*               }, 
+*           "put_one_user"={
+*               "method"="PUT",
+*               "path"="/admin/users/{id}" ,
+*               "security" = "is_granted('ROLE_ADMIN')",
+ *              "security_message" = "Accès refusé"
+*               },
+*           "archive_user"={
+*             "method"="DELETE",
+*              "path"= "/admin/users/{id}",
+*               "security" = "is_granted('ROLE_ADMIN')",
+ *              "security_message" = "Accès refusé"
+*  },
+
+* }, 
+ *)
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discriminator", type="string")
@@ -21,10 +58,12 @@ class User implements UserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"users:read_all"})
+     * 
      */
     private $email;
 
@@ -45,11 +84,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"users:read_all"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"users:read_all"})
      */
     private $lastname;
 
