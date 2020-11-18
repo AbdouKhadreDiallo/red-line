@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Profil;
+use App\Service\ArchiveService;
 use App\Repository\ProfilRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
@@ -15,7 +17,10 @@ class ProfilController extends AbstractController
 {
     private $manager;
     private $serializer;
-    public function __construct(EntityManagerInterface $manager, SerializerInterface $serializer){
+    private $archiveService;
+
+    public function __construct(ArchiveService $archiveService, EntityManagerInterface $manager, SerializerInterface $serializer){
+        $this->archiveService = $archiveService;
         $this->manager = $manager;
         $this->serializer = $serializer;
     }
@@ -26,25 +31,29 @@ class ProfilController extends AbstractController
         *   methods={"DELETE"},
         * )
     */
-    public function archiver($id, ProfilRepository $profilRepository)
-    {
-        $items_to_archive = $profilRepository->findOneBy(["id" => $id]);
-        if (!$items_to_archive) {
-            return $this->json(["message" => "Ce Profil n'existe pas"],Response::HTTP_NOT_FOUND);
-        }
-        else {
-            if ($items_to_archive->getIsDeleted() == true) {
-                $items_to_archive->setIsDeleted(false);
-                $this->manager->flush();
-                return new Response("Ressource desarchivée");
-            }
-            else {
-                $items_to_archive->setIsDeleted(true);
-                $this->manager->flush();
-                return new Response("Ressource archivée avec succes");
-            }
-        }
+    public function archiveGroupe($id, ProfilRepository $profilRepository){
+        return $this->archiveService->archive($id, $profilRepository);
     }
+    // public function archiver($id, ProfilRepository $profilRepository)
+    // {
+    //     $items_to_archive = $profilRepository->findOneBy(["id" => $id]);
+    //     if (!$items_to_archive) {
+    //         return $this->json(["message" => "Ce Profil n'existe pas"],Response::HTTP_NOT_FOUND);
+    //     }
+    //     else {
+    //         if ($items_to_archive->getIsDeleted() == true) {
+    //             $items_to_archive->setIsDeleted(false);
+    //             $this->manager->flush();
+    //             return new Response("Ressource desarchivée");
+    //         }
+    //         else {
+    //             $items_to_archive->setIsDeleted(true);
+    //             $this->manager->flush();
+    //             return new Response("Ressource archivée avec succes");
+    //         }
+    //     }
+    // }
+    
 
     /**
         * @Route(

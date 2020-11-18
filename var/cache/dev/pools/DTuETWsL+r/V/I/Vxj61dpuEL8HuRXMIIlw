@@ -23,6 +23,10 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                             ],
                         ],
                     ],
+                    'show_users_from_profil' => [
+                        'method' => 'GET',
+                        'route_name' => 'show_users_from_profil',
+                    ],
                 ],
             ],
             'itemOperations' => [
@@ -37,7 +41,7 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                     ],
                     'archive_profil' => [
                         'method' => 'DELETE',
-                        'path' => '/admin/profils/{id}',
+                        'route_name' => 'archive_profil',
                     ],
                 ],
             ],

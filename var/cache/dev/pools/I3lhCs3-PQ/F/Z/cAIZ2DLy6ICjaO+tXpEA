@@ -112,6 +112,41 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                     'liste_users' => [
                         'method' => 'GET',
                         'path' => '/admin/users',
+                        'normalization_context' => [
+                            'groups' => [
+                                'user:read',
+                            ],
+                        ],
+                        'security' => 'is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'Accès refusé',
+                        'input' => null,
+                        'output' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'add_user' => [
+                        'method' => 'POST',
+                        'path' => '/admin/users',
                         'security' => 'is_granted(\'ROLE_ADMIN\')',
                         'security_message' => 'Accès refusé',
                         'input' => null,
@@ -152,11 +187,6 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
             ],
             'attributes' => [
                 [
-                    'denormalization_context' => [
-                        'groups' => [
-                            'user:write',
-                        ],
-                    ],
                     'normalization_context' => [
                         'groups' => [
                             'user:read',

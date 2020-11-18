@@ -12,6 +12,7 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
         clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
         clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
         clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
     ],
     null,
     [
@@ -19,6 +20,7 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
             'name' => [
                 'App\\Entity\\Formateur',
                 'id',
+                'groupes',
                 'email',
                 'roles',
                 'password',
@@ -31,14 +33,31 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
             'attributesMetadata' => [
                 [
                     'id' => $o[1],
-                    'email' => $o[2],
-                    'roles' => $o[3],
-                    'password' => $o[4],
-                    'profil' => $o[5],
-                    'firstname' => $o[6],
-                    'lastname' => $o[7],
-                    'username' => $o[8],
-                    'salt' => $o[9],
+                    'groupes' => $o[2],
+                    'email' => $o[3],
+                    'roles' => $o[4],
+                    'password' => $o[5],
+                    'profil' => $o[6],
+                    'firstname' => $o[7],
+                    'lastname' => $o[8],
+                    'username' => $o[9],
+                    'salt' => $o[10],
+                ],
+            ],
+            'groups' => [
+                1 => [
+                    'user:read',
+                ],
+                3 => [
+                    'user:read',
+                ],
+                7 => [
+                    'users:read_all',
+                    'user:read',
+                ],
+                [
+                    'users:read_all',
+                    'user:read',
                 ],
             ],
         ],

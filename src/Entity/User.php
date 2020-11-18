@@ -13,15 +13,21 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ApiResource(
- * denormalizationContext={"groups":{"user:write"}},
  * normalizationContext={"groups":{"user:read"}},
  *     collectionOperations={
  *          "liste_users"={
  *              "method"="get",
  *              "path"="/admin/users",
+ *              "normalization_context" = {"groups":{"user:read"}},
  *              "security" = "is_granted('ROLE_ADMIN')",
  *              "security_message" = "Accès refusé"
- * },
+ *          },
+ *          "add_user" = {
+ *              "method" = "post",
+ *              "path"="/admin/users",
+ *              "security" = "is_granted('ROLE_ADMIN')",
+ *              "security_message" = "Accès refusé"
+ *          }
  *          
 *             },
 *           itemOperations={
@@ -32,7 +38,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *              "security_message" = "Accès refusé"
 *               }, 
 *           "put_one_user"={
-*               "method"="PUT",
+*               "method"="put",
 *               "path"="/admin/users/{id}" ,
 *               "security" = "is_granted('ROLE_ADMIN')",
  *              "security_message" = "Accès refusé"
@@ -57,12 +63,13 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"user:read"})
      */
     protected $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"users:read_all"})
+     * @Groups({"user:read"})
      * 
      */
     private $email;
@@ -85,14 +92,21 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"users:read_all"})
+     * @Groups({"user:read"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"users:read_all"})
+     * @Groups({"user:read"})
      */
     private $lastname;
+
+    /**
+     * @ORM\Column(type="blob")
+     */
+    private $avatar;
 
     public function getId(): ?int
     {
@@ -204,6 +218,18 @@ class User implements UserInterface
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar($avatar): self
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }

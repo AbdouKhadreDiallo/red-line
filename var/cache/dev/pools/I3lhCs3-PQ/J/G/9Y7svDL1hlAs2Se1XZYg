@@ -109,9 +109,9 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                             ],
                         ],
                     ],
-                    'add_apprenants' => [
+                    'add_apprenant' => [
                         'method' => 'POST',
-                        'path' => '/apprenants',
+                        'route_name' => 'add_apprenant',
                         'security' => 'is_granted(\'ROLE_FORMATEUR\')',
                         'security_message' => 'acces non autorisé',
                         'input' => null,
@@ -152,6 +152,11 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
             ],
             'attributes' => [
                 [
+                    'normalization_context' => [
+                        'groups' => [
+                            'user:read',
+                        ],
+                    ],
                     'input' => null,
                     'output' => null,
                 ],

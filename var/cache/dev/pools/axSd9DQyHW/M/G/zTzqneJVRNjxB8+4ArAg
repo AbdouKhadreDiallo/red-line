@@ -10,6 +10,7 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
             'properties' => [
                 [
                     'id',
+                    'groupes',
                     'email',
                     'username',
                     'roles',
@@ -18,6 +19,7 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                     'profil',
                     'firstname',
                     'lastname',
+                    'avatar',
                 ],
             ],
         ],

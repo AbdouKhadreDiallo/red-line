@@ -40,6 +40,15 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                     ],
                 ],
             ],
+            'attributes' => [
+                [
+                    'normalization_context' => [
+                        'groups' => [
+                            'user:read',
+                        ],
+                    ],
+                ],
+            ],
             'repositoryClass' => [
                 1 => 'App\\Repository\\ApprenantRepository',
             ],

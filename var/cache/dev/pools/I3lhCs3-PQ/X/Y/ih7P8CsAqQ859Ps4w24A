@@ -81,8 +81,8 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                     ],
                     'add_formateurs' => [
                         'method' => 'POST',
-                        'path' => '/formateurs',
-                        'security' => 'is_granted(\'ROLE_CM\')',
+                        'route_name' => 'add_formateur',
+                        'security' => 'is_granted(\'ROLE_ADMIN\')',
                         'security_message' => 'acces non autorisé',
                         'input' => null,
                         'output' => null,
