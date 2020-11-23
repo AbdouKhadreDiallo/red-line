@@ -24,16 +24,16 @@ class ProfilController extends AbstractController
         $this->manager = $manager;
         $this->serializer = $serializer;
     }
-    /**
-        * @Route(
-        *   name="archive_profil",
-        *   path="api/admin/profils/{id<[0-9]+>}",
-        *   methods={"DELETE"},
-        * )
-    */
-    public function archiveGroupe($id, ProfilRepository $profilRepository){
-        return $this->archiveService->archive($id, $profilRepository);
-    }
+    // /**
+    //     * @Route(
+    //     *   name="archive_profil",
+    //     *   path="api/admin/profils/{id<[0-9]+>}",
+    //     *   methods={"DELETE"},
+    //     * )
+    // */
+    // public function archiveGroupe($id, ProfilRepository $profilRepository){
+    //     return $this->archiveService->archive($id, $profilRepository);
+    
     // public function archiver($id, ProfilRepository $profilRepository)
     // {
     //     $items_to_archive = $profilRepository->findOneBy(["id" => $id]);
@@ -55,23 +55,6 @@ class ProfilController extends AbstractController
     // }
     
 
-    /**
-        * @Route(
-        *   name="show_users_from_profil",
-        *   path="api/admin/profils/{id<[0-9]+>}/users",
-        *   methods={"GET"},
-        * )
-    */
-    public function show_users_from_profils($id, ProfilRepository $profilRepository){
-        $items_to_archive = $profilRepository->findOneBy(["id" => $id]);
-        if (!$items_to_archive) {
-            return $this->json(["message" => "Ce Profil n'existe pas"],Response::HTTP_NOT_FOUND);
-        }
-        else {
-            $itemsToChowJson = $this->serializer->serialize($items_to_archive->getUsers(), 'json');
-            //dd($items_to_archive->getUsers());
-            return new JsonResponse($itemsToChowJson, Response::HTTP_OK, [], true);
-        }
-    }
+   
 
 }

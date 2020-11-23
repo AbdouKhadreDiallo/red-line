@@ -1,0 +1,99 @@
+<?php //%255BApp%255CEntity%255CProfil%255D%255B1%255D
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['ApiPlatform\\Core\\Annotation\\ApiResource'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Annotation\\ApiResource')),
+        clone ($p['ApiPlatform\\Core\\Annotation\\ApiFilter'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Annotation\\ApiFilter')),
+        clone ($p['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
+        clone ($p['Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\UniqueEntity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\UniqueEntity')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'collectionOperations' => [
+                [
+                    'add_profil' => [
+                        'method' => 'post',
+                        'path' => '/admin/profils',
+                    ],
+                    'show_profils' => [
+                        'method' => 'GET',
+                        'path' => '/admin/profils',
+                        'normalization_context' => [
+                            'groups' => [
+                                'profil:read',
+                            ],
+                        ],
+                    ],
+                    'show_users_from_profil' => [
+                        'method' => 'GET',
+                        'path' => '/admin/profils/{id}/users',
+                        'normalization_context' => [
+                            'groups' => [
+                                'users_profils:read',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'itemOperations' => [
+                [
+                    'show_one_profil' => [
+                        'method' => 'get',
+                        'path' => '/admin/profils/{id}',
+                    ],
+                    'update_profil' => [
+                        'method' => 'put',
+                        'path' => '/admin/profils/{id}',
+                    ],
+                    'delete_profil' => [
+                        'method' => 'delete',
+                        'path' => '/admin/profils/{id}',
+                    ],
+                ],
+            ],
+            'attributes' => [
+                [
+                    'security' => 'is_granted(\'ROLE_ADMIN\')',
+                    'security_message' => 'Seuls les admins ont le droit d\'acces à ce ressource',
+                    'normalization_context' => [
+                        'groups' => [
+                            'profil:read',
+                        ],
+                    ],
+                    'denormalization_context' => [
+                        'groups' => [
+                            'profil:write',
+                        ],
+                    ],
+                ],
+            ],
+            'filterClass' => [
+                1 => 'ApiPlatform\\Core\\Bridge\\Doctrine\\Orm\\Filter\\BooleanFilter',
+            ],
+            'properties' => [
+                1 => [
+                    'isDeleted',
+                ],
+            ],
+            'repositoryClass' => [
+                2 => 'App\\Repository\\ProfilRepository',
+            ],
+            'fields' => [
+                3 => 'libelle',
+            ],
+            'groups' => [
+                3 => [
+                    'Default',
+                ],
+            ],
+        ],
+    ],
+    [
+        $o[0],
+        $o[1],
+        $o[2],
+        $o[3],
+    ],
+    []
+); }];

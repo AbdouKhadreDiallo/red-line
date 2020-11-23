@@ -2,18 +2,20 @@
 
 namespace App\Entity;
 
-use Webmozart\Assert\Assert;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 
 /**
  * @ApiResource(
- * normalizationContext={"groups":{"user:read"}},
  *     collectionOperations={
  *          "liste_users"={
  *              "method"="get",
@@ -43,12 +45,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 *               "security" = "is_granted('ROLE_ADMIN')",
  *              "security_message" = "Accès refusé"
 *               },
-*           "archive_user"={
-*             "method"="DELETE",
-*              "path"= "/admin/users/{id}",
-*               "security" = "is_granted('ROLE_ADMIN')",
- *              "security_message" = "Accès refusé"
-*  },
 
 * }, 
  *)
@@ -56,6 +52,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discriminator", type="string")
  * @ORM\DiscriminatorMap({"user" = "User", "admin" = "Admin", "formateur" = "Formateur", "apprenant" = "Apprenant"})
+ * 
+ * @ApiFilter(BooleanFilter::class, properties={"isDeleted"})
  */
 class User implements UserInterface
 {
@@ -69,7 +67,8 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"user:read"})
+     * @Groups({"user:read","users_profils:read"})
+     * @Assert\NotBlank(message = "L'email est requis")
      * 
      */
     private $email;
@@ -92,21 +91,30 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"users:read_all"})
-     * @Groups({"user:read"})
+     * @Groups({"user:read","users_profils:read"})
+     * @Assert\NotBlank(message = "Le prenom ne peut pas etre vide")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"users:read_all"})
-     * @Groups({"user:read"})
+     * @Groups({"user:read","users_profils:read"})
+     * @Assert\NotBlank(message = "Le nom ne peut pas etre vide")
      */
     private $lastname;
 
     /**
-     * @ORM\Column(type="blob")
+     * @ORM\Column(type="blob", nullable=true)
      */
     private $avatar;
+
+    /**
+     * @ORM\Column(type="boolean",options={"default" : false}, nullable=true)
+     * @Groups({"users:read_all"})
+     * @Groups({"user:read","users_profils:read"})
+     */
+    private $isDeleted;
 
     public function getId(): ?int
     {
@@ -230,6 +238,18 @@ class User implements UserInterface
     public function setAvatar($avatar): self
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    public function getIsDeleted(): ?bool
+    {
+        return $this->isDeleted;
+    }
+
+    public function setIsDeleted(bool $isDeleted): self
+    {
+        $this->isDeleted = $isDeleted;
 
         return $this;
     }

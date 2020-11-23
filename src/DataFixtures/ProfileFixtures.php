@@ -15,7 +15,7 @@ class ProfileFixtures extends Fixture
         foreach($profiltab as $theProfil){
             $profil = new Profil;
             $profil->setLibelle($theProfil);
-            
+            $profil->setIsDeleted(false);
             $manager->persist($profil);
             $manager->flush();
             

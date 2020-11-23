@@ -4,8 +4,71 @@
 
 return [[
 
+'App.Entity.GroupeCompetence' => 0,
 
 ], [
 
+0 => static function () {
+    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+        $o = [
+            (($f = &\Symfony\Component\VarExporter\Internal\Registry::$factories)['Symfony\\Component\\Validator\\Mapping\\ClassMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::f('Symfony\\Component\\Validator\\Mapping\\ClassMetadata'))(),
+            ($f['Symfony\\Component\\Validator\\Mapping\\PropertyMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::f('Symfony\\Component\\Validator\\Mapping\\PropertyMetadata'))(),
+            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Symfony\\Component\\Validator\\Constraints\\NotBlank'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Validator\\Constraints\\NotBlank')),
+        ],
+        null,
+        [
+            'stdClass' => [
+                'name' => [
+                    'App\\Entity\\GroupeCompetence',
+                    'competences',
+                ],
+                'defaultGroup' => [
+                    'GroupeCompetence',
+                ],
+                'members' => [
+                    [
+                        'competences' => [
+                            $o[1],
+                        ],
+                    ],
+                ],
+                'properties' => [
+                    [
+                        'competences' => $o[1],
+                    ],
+                ],
+                'class' => [
+                    1 => 'App\\Entity\\GroupeCompetence',
+                ],
+                'property' => [
+                    1 => 'competences',
+                ],
+                'constraints' => [
+                    1 => [
+                        $o[2],
+                    ],
+                ],
+                'constraintsByGroup' => [
+                    1 => [
+                        'Default' => [
+                            $o[2],
+                        ],
+                        'GroupeCompetence' => [
+                            $o[2],
+                        ],
+                    ],
+                ],
+                'groups' => [
+                    2 => [
+                        'Default',
+                        'GroupeCompetence',
+                    ],
+                ],
+            ],
+        ],
+        $o[0],
+        []
+    );
+},
 
 ]];

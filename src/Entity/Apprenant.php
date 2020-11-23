@@ -15,7 +15,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *          "liste_apprenants"={
  *              "method"="get",
  *              "path" = "/apprenants",
- *              "security" = "is_granted('ROLE_FORMATEUR') or is_granted('ROLE_CM')",
+ *              "security" = "is_granted('ROLE_FORMATEUR') or is_granted('ROLE_ADMIN')",
  *              "security_message" = "acces non autorisé"
  *          },
  *          "add_apprenant" = {
@@ -51,44 +51,29 @@ class Apprenant extends User
      */
     protected $id;
 
+    
     /**
-     * @ORM\ManyToMany(targetEntity=Groupe::class, mappedBy="Apprenants")
+     * @ORM\ManyToOne(targetEntity=ProfilSortie::class, inversedBy="apprenants")
      */
-    private $groupes;
+    private $profilSortie;
 
-    public function __construct()
-    {
-        $this->groupes = new ArrayCollection();
-    }
+    
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return Collection|Groupe[]
-     */
-    public function getGroupes(): Collection
+    
+
+    public function getProfilSortie(): ?ProfilSortie
     {
-        return $this->groupes;
+        return $this->profilSortie;
     }
 
-    public function addGroupe(Groupe $groupe): self
+    public function setProfilSortie(?ProfilSortie $profilSortie): self
     {
-        if (!$this->groupes->contains($groupe)) {
-            $this->groupes[] = $groupe;
-            $groupe->addApprenant($this);
-        }
-
-        return $this;
-    }
-
-    public function removeGroupe(Groupe $groupe): self
-    {
-        if ($this->groupes->removeElement($groupe)) {
-            $groupe->removeApprenant($this);
-        }
+        $this->profilSortie = $profilSortie;
 
         return $this;
     }

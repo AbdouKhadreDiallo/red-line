@@ -1,0 +1,4 @@
+App\Entity\GroupeCompetence:
+    properties:
+        competences:
+            - NotBlank: ~

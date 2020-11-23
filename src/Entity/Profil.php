@@ -5,11 +5,15 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProfilRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ApiResource(
@@ -23,13 +27,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  *              "path"="/admin/profils"
  *           },
  *            "show_profils"={
-*                 "method" = "GET",
+ *                 "method" = "GET",
  *                 "path"="/admin/profils",
  *                  "normalization_context"={"groups"={"profil:read"}},
-*              },
-*                "show_users_from_profil"={
-*                "method" = "GET",
-*                "route_name" = "show_users_from_profil",}
+ *              },
+ *                "show_users_from_profil"={
+ *                "method" = "GET",
+ *                "path" = "/admin/profils/{id}/users",
+ *                  "normalization_context"={"groups"={"users_profils:read"}},
+ *              },
  * },
  *     itemOperations = {
  *           "show_one_profil"={
@@ -40,15 +46,19 @@ use Symfony\Component\Validator\Constraints as Assert;
  *              "method"="put",
  *              "path"="/admin/profils/{id}"
  * },
- *         "archive_profil"={
-*                "method" = "DELETE",
-*                "route_name" = "archive_profil",
-*  }                
+ *          "delete_profil"={
+ *              "method"="delete",
+ *              "path"="/admin/profils/{id}"
+ *          }                                        
  *  },
  *             normalizationContext={"groups"={"profil:read"}},
  *              denormalizationContext={"groups"={"profil:write"}}
  * )
+ * 
+ * @ApiFilter(BooleanFilter::class, properties={"isDeleted"})
+ * 
  * @ORM\Entity(repositoryClass=ProfilRepository::class)
+ * @UniqueEntity("libelle")
  */
 class Profil
 {
@@ -69,17 +79,19 @@ class Profil
      * @Groups({"profil:read", "profil:write", "users:read_all"})
      * @Assert\NotBlank(message = "Le libelle ne peut pas etre vide")
      * @Assert\Choice(choices=Profil::ALLOWED_PROFILS, message="Donner un profil valide")
-     * @Groups({"users:read_all"})
+     * @Groups({"users:read_all","users_profils:read"})
      */
     private $libelle;
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="profil")
+     * @ApiSubresource()
      */
     private $users;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"profil:read", "profil:write", "users:read_all"})
      */
     private $isDeleted;
 

@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -11,8 +13,6 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
 
 class UserController extends AbstractController
 {
@@ -28,6 +28,23 @@ class UserController extends AbstractController
         $this->repository = $repository;
         $this->validator = $validator;
         $this->manager = $manager;
+    }
+
+    /**
+     * @Route(
+     * name="add_admin",
+     * path="api/admins",
+     * methods={"POST"},
+     * defaults={
+     * "_controller"="app\Controller\UserController::addAdmin",
+     * "_api_resource_class"=Admin::class,
+     * "api_collection_operation_name"="add_admin"
+     * }
+     * )
+     */
+    public function addAdmin(Request $request)
+    {
+        return $this->add("App\Entity\Admin", $request);
     }
 
     /**
@@ -69,31 +86,25 @@ class UserController extends AbstractController
 
     public function add($entite, $request)
     {
-        // dd($request);
         $user = $request->request->all();
         $avatar = $request->files->get("avatar");
-
-        
-        //on ouvre le fichier et on le lit en format binaire
         $avatar = fopen($avatar->getRealPath(), 'rb');
         $user["avatar"]=$avatar;
         $userWithSameEmail = $this->repository->findBy([
             "email" => $user["email"]
         ]);
-
         if(count($userWithSameEmail)){
             return new JsonResponse("Cet utilisateur existe déjà",Response::HTTP_FORBIDDEN,[],true);
         }
         $user = $this->serializer->denormalize($user, $entite, true);
+        // dd($user);
         $errors = $this->validator->validate($user);
         if(count($errors) > 0){
             $errors = $this->serializer->serialize($errors,'json');
             return new JsonResponse($errors,Response::HTTP_BAD_REQUEST,[],true);
         }
-        // fclose($avatar);
-        // $data->setPassword($this->passwordEncoder->encodePassword($user,$user->getPassword()));
-
         $user->setRoles($user->getRoles());
+        $user->setIsDeleted(false);
         $user->setPassword($this->encoder->encodePassword($user,"password"));
         $this->manager->persist($user);
         $this->manager->flush();

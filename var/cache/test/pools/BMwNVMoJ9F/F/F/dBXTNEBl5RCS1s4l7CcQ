@@ -1,0 +1,76 @@
+<?php //App_Entity_Apprenant
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Symfony\\Component\\Serializer\\Mapping\\ClassMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Serializer\\Mapping\\ClassMetadata')),
+        clone ($p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata')),
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'App\\Entity\\Apprenant',
+                'id',
+                'groupes',
+                'profilSortie',
+                'email',
+                'roles',
+                'password',
+                'profil',
+                'firstname',
+                'lastname',
+                'avatar',
+                'username',
+                'salt',
+            ],
+            'attributesMetadata' => [
+                [
+                    'id' => $o[1],
+                    'groupes' => $o[2],
+                    'profilSortie' => $o[3],
+                    'email' => $o[4],
+                    'roles' => $o[5],
+                    'password' => $o[6],
+                    'profil' => $o[7],
+                    'firstname' => $o[8],
+                    'lastname' => $o[9],
+                    'avatar' => $o[10],
+                    'username' => $o[11],
+                    'salt' => $o[12],
+                ],
+            ],
+            'groups' => [
+                1 => [
+                    'user:read',
+                ],
+                4 => [
+                    'user:read',
+                    'users_profils:read',
+                ],
+                8 => [
+                    'users:read_all',
+                    'user:read',
+                    'users_profils:read',
+                ],
+                [
+                    'users:read_all',
+                    'user:read',
+                    'users_profils:read',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

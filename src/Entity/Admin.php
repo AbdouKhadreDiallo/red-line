@@ -7,7 +7,16 @@ use App\Repository\AdminRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
- * ApiResource()
+ * @ApiResource(
+ *      collectionOperations = {
+ *          "add_admins" = {
+ *              "method" = "post",
+ *              "route_name"="add_admin",
+ *              "security" = "is_granted('ROLE_ADMIN')",
+ *              "security_message" = "acces non autorisé"
+ *          }
+ *      }
+ * )
  * @ORM\Entity(repositoryClass=AdminRepository::class)
  */
 class Admin extends User

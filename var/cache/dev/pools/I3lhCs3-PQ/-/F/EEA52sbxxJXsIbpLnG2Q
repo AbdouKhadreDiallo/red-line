@@ -1,0 +1,194 @@
+<?php //resource_metadata_9f23c2d6676a1f68268fe9bd4dcbf7e3
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['ApiPlatform\\Core\\Metadata\\Resource\\ResourceMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Metadata\\Resource\\ResourceMetadata')),
+    ],
+    null,
+    [
+        'ApiPlatform\\Core\\Metadata\\Resource\\ResourceMetadata' => [
+            'shortName' => [
+                'ProfilSortie',
+            ],
+            'description' => [
+                '',
+            ],
+            'itemOperations' => [
+                [
+                    'show_One_Profils_de_sortie' => [
+                        'method' => 'GET',
+                        'path' => '/admin/profils_de_sorties/{id}',
+                        'defaults' => [
+                            'id' => null,
+                        ],
+                        'security' => 'is_granted(\'PROFILSORTIE_READ\', object)',
+                        'security_message' => 'acces non autorisé',
+                        'input' => null,
+                        'output' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'put_Profils_de_sortie' => [
+                        'method' => 'PUT',
+                        'path' => '/admin/profils_de_sorties/{id}',
+                        'security' => 'is_granted(\'PROFILSORTIE_EDIT\', object)',
+                        'security_message' => 'acces non autorisé',
+                        'input' => null,
+                        'output' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'archive_profil' => [
+                        'method' => 'DELETE',
+                        'path' => '/admin/profils_de_sorties/{id}',
+                        'input' => null,
+                        'output' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'collectionOperations' => [
+                [
+                    'show_all_profils' => [
+                        'method' => 'GET',
+                        'path' => '/admin/profils_de_sorties',
+                        'security' => 'is_granted(\'PROFILSORTIE_READ\')',
+                        'security_message' => 'acces non autorisé',
+                        'input' => null,
+                        'output' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'add_profils_sortie' => [
+                        'method' => 'POST',
+                        'path' => '/admin/profils_de_sorties',
+                        'security_post_denormalize' => 'is_granted(\'PROFILSORTIE_CREATE\', object)',
+                        'security_message' => 'acces non autorisé sa waay',
+                        'input' => null,
+                        'output' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'graphql' => [
+                [
+                    'item_query' => [],
+                    'collection_query' => [],
+                    'delete' => [],
+                    'update' => [],
+                    'create' => [],
+                ],
+            ],
+            'attributes' => [
+                [
+                    'input' => null,
+                    'output' => null,
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];
