@@ -1,3 +1,61 @@
 <?php //subresource_operations_ef108116eeefd6ff32f4a77fdae3d499
 
-return [PHP_INT_MAX, []];
+return [PHP_INT_MAX, [
+    'api_referentiels_groupe_competences_get_subresource' => [
+        'property' => 'groupeCompetence',
+        'collection' => true,
+        'resource_class' => 'App\\Entity\\GroupeCompetence',
+        'shortNames' => [
+            'GroupeCompetence',
+            'Referentiel',
+        ],
+        'identifiers' => [
+            [
+                'id',
+                'App\\Entity\\Referentiel',
+                true,
+            ],
+        ],
+        'operation_name' => 'groupe_competences_get_subresource',
+        'route_name' => 'api_referentiels_groupe_competences_get_subresource',
+        'path' => '/referentiels/{id}/groupe_competences.{_format}',
+        'defaults' => [],
+        'requirements' => [],
+        'options' => [],
+        'host' => '',
+        'schemes' => [],
+        'condition' => '',
+        'controller' => null,
+    ],
+    'api_referentiels_groupe_competences_competences_get_subresource' => [
+        'property' => 'competences',
+        'collection' => true,
+        'resource_class' => 'App\\Entity\\Competences',
+        'shortNames' => [
+            'Competences',
+            'GroupeCompetence',
+        ],
+        'identifiers' => [
+            [
+                'id',
+                'App\\Entity\\Referentiel',
+                true,
+            ],
+            [
+                'groupeCompetence',
+                'App\\Entity\\GroupeCompetence',
+                true,
+            ],
+        ],
+        'operation_name' => 'groupe_competences_competences_get_subresource',
+        'route_name' => 'api_referentiels_groupe_competences_competences_get_subresource',
+        'path' => '/referentiels/{id}/groupe_competences/{groupeCompetence}/competences.{_format}',
+        'defaults' => [],
+        'requirements' => [],
+        'options' => [],
+        'host' => '',
+        'schemes' => [],
+        'condition' => '',
+        'controller' => null,
+    ],
+]];

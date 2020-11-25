@@ -25,6 +25,8 @@ class Competences
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"grpeCompetence:read"})
+     * @Groups({"cmpteneceFromGroupFromReferentiel:read"})
+     * @Groups({"AllGrpeCompetence:read"})
      */
     private $libelle;
 

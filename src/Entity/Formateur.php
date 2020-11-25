@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\FormateurRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 
 /**
  * @ApiResource(
@@ -28,7 +30,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *          "show_one_formateur" = {
  *              "method" = "get",
  *              "path" = "/formateurs/{id}",
- *              "security" = "is_granted('FORMATEUR_VIEW', object)",
+ *              "security" = "is_granted('ROLE_ADMIN')",
  *              "security_message" = "acces non autorisé"
  *          },
  *          "put_formateur" = {
@@ -37,9 +39,16 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *              "security" = "is_granted('ROLE_ADMIN')",
  *              "security_message" = "acces non autorisé"
  *          },
+ *          "delete_formateur" = {
+ *              "method" = "delete",
+ *              "path" = "/formateurs/{id}",
+ *              "security" = "is_granted('ROLE_ADMIN')",
+ *              "security_message" = "acces non autorisé"
+ *          }
  *      }
  * )
  * @ORM\Entity(repositoryClass=FormateurRepository::class)
+ * @ApiFilter(BooleanFilter::class, properties={"isDeleted"})
  */
 class Formateur extends User
 {

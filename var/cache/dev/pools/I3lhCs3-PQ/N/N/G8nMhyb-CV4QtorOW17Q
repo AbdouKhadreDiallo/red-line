@@ -15,8 +15,18 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
             ],
             'itemOperations' => [
                 [
-                    'get' => [
+                    'get_One_ref' => [
                         'method' => 'GET',
+                        'path' => '/referentiels/{id}',
+                        'normalization_context' => [
+                            'groups' => [
+                                'referentiel:read',
+                            ],
+                        ],
+                        'security' => 'is_granted(\'ROLE_FORMATEUR\') or is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                        'input' => null,
+                        'output' => null,
                         'input_formats' => [
                             'jsonld' => [
                                 'application/ld+json',
@@ -40,8 +50,18 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                             ],
                         ],
                     ],
-                    'delete' => [
-                        'method' => 'DELETE',
+                    'get_grpe_competes' => [
+                        'method' => 'GET',
+                        'path' => '/referentiels/{id}/groupe_competences/{groupeCompetence}/competences',
+                        'normalization_context' => [
+                            'groups' => [
+                                'cmpteneceFromGroupFromReferentiel:read',
+                            ],
+                        ],
+                        'security' => 'is_granted(\'ROLE_FORMATEUR\') or is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                        'input' => null,
+                        'output' => null,
                         'input_formats' => [
                             'jsonld' => [
                                 'application/ld+json',
@@ -65,8 +85,13 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                             ],
                         ],
                     ],
-                    'put' => [
+                    'edit_ref' => [
                         'method' => 'PUT',
+                        'route_name' => 'edit_referentiel',
+                        'security' => 'is_granted(\'ROLE_ADMIN\') or is_granted(\'ROLE_FORMATEUR\') or is_granted(\'ROLE_CM\')',
+                        'security_message' => 'acces non autorisé',
+                        'input' => null,
+                        'output' => null,
                         'input_formats' => [
                             'jsonld' => [
                                 'application/ld+json',
@@ -90,11 +115,22 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                             ],
                         ],
                     ],
-                    'patch' => [
-                        'method' => 'PATCH',
+                    'delete_ref' => [
+                        'method' => 'DELETE',
+                        'path' => '/referentiels/{id}',
+                        'security' => 'is_granted(\'ROLE_ADMIN\') or is_granted(\'ROLE_FORMATEUR\') or is_granted(\'ROLE_CM\')',
+                        'security_message' => 'acces non autorisé',
+                        'input' => null,
+                        'output' => null,
                         'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
                             'json' => [
-                                'application/merge-patch+json',
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
                             ],
                         ],
                         'output_formats' => [
@@ -113,8 +149,13 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
             ],
             'collectionOperations' => [
                 [
-                    'get' => [
-                        'method' => 'GET',
+                    'add_ref' => [
+                        'method' => 'POST',
+                        'route_name' => 'add_referentiel',
+                        'security' => 'is_granted(\'ROLE_FORMATEUR\') or is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                        'input' => null,
+                        'output' => null,
                         'input_formats' => [
                             'jsonld' => [
                                 'application/ld+json',
@@ -138,8 +179,53 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                             ],
                         ],
                     ],
-                    'post' => [
-                        'method' => 'POST',
+                    'get_ref' => [
+                        'method' => 'GET',
+                        'path' => '/referentiels',
+                        'normalization_context' => [
+                            'groups' => [
+                                'referentiel:read',
+                            ],
+                        ],
+                        'security' => 'is_granted(\'ROLE_FORMATEUR\') or is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                        'input' => null,
+                        'output' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'get_grpeCompet_Competence' => [
+                        'method' => 'GET',
+                        'path' => '/referentiels/GrpeCompetence',
+                        'normalization_context' => [
+                            'groups' => [
+                                'AllGrpeCompetence:read',
+                            ],
+                        ],
+                        'security' => 'is_granted(\'ROLE_FORMATEUR\') or is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                        'input' => null,
+                        'output' => null,
                         'input_formats' => [
                             'jsonld' => [
                                 'application/ld+json',

@@ -29,6 +29,8 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
             'groups' => [
                 2 => [
                     'grpeCompetence:read',
+                    'cmpteneceFromGroupFromReferentiel:read',
+                    'AllGrpeCompetence:read',
                 ],
             ],
         ],

@@ -2,7 +2,11 @@
 
 namespace App\Controller;
 
+use App\Service\UsersService;
+use App\Service\AddUserService;
 use App\Repository\UserRepository;
+use App\Service\UploadAvatarService;
+use App\Repository\ApprenantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
@@ -21,13 +25,18 @@ class UserController extends AbstractController
     private $repository;
     private $validator;
     private $manager;
+    private $apprenantRepository;
+    private $addUserService;
 
-    public function __construct(UserPasswordEncoderInterface $encoder,SerializerInterface $serializer, UserRepository $repository, EntityManagerInterface $manager, ValidatorInterface $validator){
+    public function __construct(UploadAvatarService $uploadAvatarService, AddUserService $addUserService,ApprenantRepository $apprenantRepository,UserPasswordEncoderInterface $encoder,SerializerInterface $serializer, UserRepository $repository, EntityManagerInterface $manager, ValidatorInterface $validator){
         $this->encoder = $encoder;
         $this->serializer = $serializer;
         $this->repository = $repository;
         $this->validator = $validator;
         $this->manager = $manager;
+        $this->addUserService = $addUserService;
+        $this->uploadAvatarService = $uploadAvatarService;
+        $this->apprenantRepository = $apprenantRepository;
     }
 
     /**
@@ -82,7 +91,22 @@ class UserController extends AbstractController
         return $this->add("App\Entity\Apprenant", $request);
     }
 
-    
+    /** 
+     * @Route(
+     * name="edit_apprenant",
+     * path="api/apprenants/{id}",
+     * methods={"PUT"},
+     * defaults={
+     * "_controller"="app\Controller\UserController::updateApprenant",
+     * "_api_resource_class"=User::class,
+     * "api_collection_operation_name"="add_apprenant"
+     * }
+     * )
+     */
+
+    public function updateApprenant($id, Request $request){
+        return $this->addUserService->updateUser("App\Entity\Apprenant", $request, $id);
+    }
 
     public function add($entite, $request)
     {

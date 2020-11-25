@@ -4,7 +4,9 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\AdminRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 
 /**
  * @ApiResource(
@@ -18,6 +20,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *      }
  * )
  * @ORM\Entity(repositoryClass=AdminRepository::class)
+ * @ApiFilter(BooleanFilter::class, properties={"isDeleted"})
  */
 class Admin extends User
 {

@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ApprenantRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 
 /**
  * @ApiResource(
@@ -29,18 +31,25 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *          "show_one_apprenants"={
  *              "method" = "get",
  *              "path" = "/apprenants/{id}",
- *              "security" = "is_granted('ROLE_FORMATEUR') or is_granted('ROLE_CM')",
+ *              "security" = "is_granted('ROLE_FORMATEUR') or is_granted('ROLE_CM') or is_granted('ROLE_ADMIN')",
  *              "security_message" = "acces non autorisé"
  *          },
  *          "modify_apprenant" = {
  *              "method"="put",
- *              "path" = "/apprenants/{id}",
- *              "security" = "is_granted('ROLE_FORMATEUR')",
+ *              "route_name"="edit_apprenant",
+ *              "security" = "is_granted('ROLE_ADMIN')",
  *              "security_message" = "acces non autorisé"
  *          },
+ *          "delete_apprenant" = {
+ *              "method" = "delete",
+ *              "path" = "/apprenants/{id}",
+ *              "security" = "is_granted('ROLE_FORMATEUR') or is_granted('ROLE_CM') or is_granted('ROLE_ADMIN')",
+ *              "security_message" = "acces non autorisé"
+ *          }
  *      }
  * )
  * @ORM\Entity(repositoryClass=ApprenantRepository::class)
+ * @ApiFilter(BooleanFilter::class, properties={"isDeleted"})
  */
 class Apprenant extends User
 {

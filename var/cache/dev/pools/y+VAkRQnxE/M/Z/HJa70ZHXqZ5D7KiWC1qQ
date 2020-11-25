@@ -8,6 +8,7 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
         clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
         clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
         clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
     ],
     null,
     [
@@ -19,6 +20,7 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                 'descriptif',
                 'isDeleted',
                 'competences',
+                'referentiels',
             ],
             'attributesMetadata' => [
                 [
@@ -27,17 +29,24 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                     'descriptif' => $o[3],
                     'isDeleted' => $o[4],
                     'competences' => $o[5],
+                    'referentiels' => $o[6],
                 ],
             ],
             'groups' => [
                 2 => [
                     'grpeCompetence:read',
+                    'referentiel:read',
+                    'AllGrpeCompetence:read',
                 ],
                 [
                     'grpeCompetence:read',
+                    'referentiel:read',
+                    'AllGrpeCompetence:read',
                 ],
                 5 => [
                     'grpeCompetence:read',
+                    'cmpteneceFromGroupFromReferentiel:read',
+                    'AllGrpeCompetence:read',
                 ],
             ],
         ],

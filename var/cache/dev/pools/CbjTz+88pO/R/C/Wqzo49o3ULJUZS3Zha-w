@@ -1,0 +1,3 @@
+<?php //route_name_51f8615b08b79dffb9f7c9c7179c3437
+
+return [PHP_INT_MAX, 'api_groupe_competences_get_collection'];

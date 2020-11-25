@@ -30,7 +30,7 @@ class CompetencePersister implements DataPersisterInterface
     }
     public function persist($data)
     {
-        dd(count($data->getNiveaux()));
+        //dd(count($data->getNiveaux()));
         foreach ($data->getNiveaux() as $niveaux) {
             $niveau = new Niveau();
             $niveau->setCritereEvaluation($niveaux->getCritereEvaluation());

@@ -63,7 +63,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Profil
 {
 
-    const ALLOWED_PROFILS = ["ADMIN", "FORMATEUR", "CM", "APPRENANT"];
 
     /**
      * @ORM\Id
@@ -78,7 +77,6 @@ class Profil
      * @ORM\Column(type="string", length=255)
      * @Groups({"profil:read", "profil:write", "users:read_all"})
      * @Assert\NotBlank(message = "Le libelle ne peut pas etre vide")
-     * @Assert\Choice(choices=Profil::ALLOWED_PROFILS, message="Donner un profil valide")
      * @Groups({"users:read_all","users_profils:read"})
      */
     private $libelle;

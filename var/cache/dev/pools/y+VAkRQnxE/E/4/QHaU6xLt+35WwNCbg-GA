@@ -35,6 +35,25 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                     'groupeCompetence' => $o[7],
                 ],
             ],
+            'groups' => [
+                2 => [
+                    'referentiel:read',
+                ],
+                [
+                    'referentiel:read',
+                ],
+                5 => [
+                    'referentiel:read',
+                ],
+                [
+                    'referentiel:read',
+                ],
+                [
+                    'referentiel:read',
+                    'cmpteneceFromGroupFromReferentiel:read',
+                    'AllGrpeCompetence:read',
+                ],
+            ],
         ],
     ],
     $o[0],

@@ -8,6 +8,64 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
     null,
     [
         'stdClass' => [
+            'collectionOperations' => [
+                [
+                    'add_ref' => [
+                        'method' => 'POST',
+                        'route_name' => 'add_referentiel',
+                        'security' => 'is_granted(\'ROLE_FORMATEUR\') or is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                    ],
+                    'get_ref' => [
+                        'method' => 'GET',
+                        'path' => '/referentiels',
+                        'normalization_context' => [
+                            'groups' => [
+                                'referentiel:read',
+                            ],
+                        ],
+                        'security' => 'is_granted(\'ROLE_FORMATEUR\') or is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                    ],
+                    'get_grpeCompet_Competence' => [
+                        'method' => 'GET',
+                        'path' => '/referentiels/GrpeCompetence',
+                        'normalization_context' => [
+                            'groups' => [
+                                'AllGrpeCompetence:read',
+                            ],
+                        ],
+                        'security' => 'is_granted(\'ROLE_FORMATEUR\') or is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                    ],
+                ],
+            ],
+            'itemOperations' => [
+                [
+                    'get_One_ref' => [
+                        'method' => 'get',
+                        'path' => '/referentiels/{id}',
+                        'normalization_context' => [
+                            'groups' => [
+                                'referentiel:read',
+                            ],
+                        ],
+                        'security' => 'is_granted(\'ROLE_FORMATEUR\') or is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                    ],
+                    'get_grpe_competes' => [
+                        'method' => 'get',
+                        'path' => '/referentiels/{id}/groupe_competences/{groupeCompetence}/competences',
+                        'normalization_context' => [
+                            'groups' => [
+                                'cmpteneceFromGroupFromReferentiel:read',
+                            ],
+                        ],
+                        'security' => 'is_granted(\'ROLE_FORMATEUR\') or is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                    ],
+                ],
+            ],
             'repositoryClass' => [
                 1 => 'App\\Repository\\ReferentielRepository',
             ],

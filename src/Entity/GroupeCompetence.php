@@ -30,24 +30,30 @@ class GroupeCompetence
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"grpeCompetence:read"})
+     * @Groups({"referentiel:read"})
+     * @Groups({"AllGrpeCompetence:read"})
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"grpeCompetence:read"})
+     *  @Groups({"referentiel:read"})
+     * @Groups({"AllGrpeCompetence:read"})
      */
     private $descriptif;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isDeleted;
+    private $isDeleted = false;
 
     /**
      * @ORM\ManyToMany(targetEntity=Competences::class, mappedBy="groupeCompetences")
      * @ApiSubresource
      * @Groups({"grpeCompetence:read"})
+     * @Groups({"cmpteneceFromGroupFromReferentiel:read"})
+     * @Groups({"AllGrpeCompetence:read"})
      */
     private $competences;
 
