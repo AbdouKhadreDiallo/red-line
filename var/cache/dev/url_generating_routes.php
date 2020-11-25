@@ -4,7 +4,7 @@
 
 return [
     '_preview_error' => [['code', '_format'], ['_controller' => 'error_controller::preview', '_format' => 'html'], ['code' => '\\d+'], [['variable', '.', '[^/]++', '_format', true], ['variable', '/', '\\d+', 'code', true], ['text', '/_error']], [], []],
-    'competences' => [[], ['_controller' => 'App\\Controller\\CompetencesController::index'], [], [['text', '/competences']], [], []],
+    'competences' => [[], ['_controller' => 'App\\Controller\\CompetencesController::add_competences'], [], [['text', '/api/competences']], [], []],
     'groupe_competence' => [[], ['_controller' => 'App\\Controller\\GroupeCompetenceController::addGroupeCompetences'], [], [['text', '/api/groupe_competences']], [], []],
     'groupe' => [[], ['_controller' => 'App\\Controller\\GroupeController::index'], [], [['text', '/groupe']], [], []],
     'add_referentiel' => [[], ['_controller' => 'App\\Controller\\ReferentielController::add_referentiels'], [], [['text', '/api/referentiels']], [], []],

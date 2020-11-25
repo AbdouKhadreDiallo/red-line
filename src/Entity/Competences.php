@@ -8,9 +8,14 @@ use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ApiResource
+ * @UniqueEntity(
+ *  fields={"libelle"},
+ *  message = "le libelle existe déjà"
+ * )
+ * @ApiResource()
  * @ORM\Entity(repositoryClass=CompetencesRepository::class)
  */
 class Competences
@@ -23,10 +28,11 @@ class Competences
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Groups({"grpeCompetence:read"})
      * @Groups({"cmpteneceFromGroupFromReferentiel:read"})
      * @Groups({"AllGrpeCompetence:read"})
+     * 
      */
     private $libelle;
 

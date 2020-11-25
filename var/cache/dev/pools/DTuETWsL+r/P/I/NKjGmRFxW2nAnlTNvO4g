@@ -1,0 +1,75 @@
+<?php //%255BApp%255CEntity%255CProfilSortie%255D%255B1%255D
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\UniqueEntity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\UniqueEntity')),
+        clone ($p['ApiPlatform\\Core\\Annotation\\ApiResource'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Annotation\\ApiResource')),
+        clone ($p['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'message' => [
+                'le libelle existe déjà',
+            ],
+            'fields' => [
+                [
+                    'libelle',
+                ],
+            ],
+            'groups' => [
+                [
+                    'Default',
+                ],
+            ],
+            'collectionOperations' => [
+                1 => [
+                    'show_all_profils' => [
+                        'method' => 'get',
+                        'path' => '/admin/profils_de_sorties',
+                        'security' => 'is_granted(\'PROFILSORTIE_READ\')',
+                        'security_message' => 'acces non autorisé',
+                    ],
+                    'add_profils_sortie' => [
+                        'method' => 'post',
+                        'path' => '/admin/profils_de_sorties',
+                        'security_post_denormalize' => 'is_granted(\'PROFILSORTIE_CREATE\', object)',
+                        'security_message' => 'acces non autorisé sa waay',
+                    ],
+                ],
+            ],
+            'itemOperations' => [
+                1 => [
+                    'show_One_Profils_de_sortie' => [
+                        'method' => 'get',
+                        'path' => '/admin/profils_de_sorties/{id}',
+                        'defaults' => [
+                            'id' => null,
+                        ],
+                        'security' => 'is_granted(\'PROFILSORTIE_READ\', object)',
+                        'security_message' => 'acces non autorisé',
+                    ],
+                    'put_Profils_de_sortie' => [
+                        'method' => 'put',
+                        'path' => '/admin/profils_de_sorties/{id}',
+                        'security' => 'is_granted(\'PROFILSORTIE_EDIT\', object)',
+                        'security_message' => 'acces non autorisé',
+                    ],
+                    'archive_profil' => [
+                        'method' => 'delete',
+                        'path' => '/admin/profils_de_sorties/{id}',
+                    ],
+                ],
+            ],
+            'repositoryClass' => [
+                2 => 'App\\Repository\\ProfilSortieRepository',
+            ],
+        ],
+    ],
+    [
+        $o[0],
+        $o[1],
+        $o[2],
+    ],
+    []
+); }];

@@ -91,7 +91,7 @@ class Profil
      * @ORM\Column(type="boolean")
      * @Groups({"profil:read", "profil:write", "users:read_all"})
      */
-    private $isDeleted;
+    private $isDeleted=false;
 
     public function __construct()
     {

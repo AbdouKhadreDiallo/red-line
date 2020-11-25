@@ -424,6 +424,9 @@
     <service id="App\Controller\CompetencesController" class="App\Controller\CompetencesController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+      <argument type="service" id="serializer"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+      <argument type="service" id="validator"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.g9CqTPp.App\Controller\CompetencesController"/>
       </call>
@@ -504,13 +507,6 @@
       <tag name="api_platform.data_persister"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
     </service>
-    <service id="App\DataPersister\CompetencePersister" class="App\DataPersister\CompetencePersister" autowire="true" autoconfigure="true">
-      <tag name="api_platform.data_persister"/>
-      <argument type="service" id="security.user_password_encoder.generic"/>
-      <argument type="service" id="serializer"/>
-      <argument type="service" id="doctrine.orm.default_entity_manager"/>
-      <argument type="service" id="validator"/>
-    </service>
     <service id="App\DataPersister\FormateurPersister" class="App\DataPersister\FormateurPersister" autowire="true" autoconfigure="true">
       <tag name="api_platform.data_persister"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
@@ -566,6 +562,9 @@
     <service id="App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Security\Voter\CompetencesVoter" class="App\Security\Voter\CompetencesVoter" autowire="true" autoconfigure="true">
+      <tag name="security.voter"/>
     </service>
     <service id="App\Security\Voter\GroupeCompetenceVoter" class="App\Security\Voter\GroupeCompetenceVoter" autowire="true" autoconfigure="true">
       <tag name="security.voter"/>
@@ -5716,8 +5715,6 @@
     <service id=".abstract.instanceof.App\DataFixtures\ProfileFixtures" class="App\DataFixtures\ProfileFixtures" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.ApiPlatform\Core\DataPersister\DataPersisterInterface.0.App\DataPersister\ApprenantPersister" class="App\DataPersister\ApprenantPersister" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\DataPersister\ApprenantPersister" class="App\DataPersister\ApprenantPersister" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.ApiPlatform\Core\DataPersister\DataPersisterInterface.0.App\DataPersister\CompetencePersister" class="App\DataPersister\CompetencePersister" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\DataPersister\CompetencePersister" class="App\DataPersister\CompetencePersister" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.ApiPlatform\Core\DataPersister\DataPersisterInterface.0.App\DataPersister\FormateurPersister" class="App\DataPersister\FormateurPersister" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\DataPersister\FormateurPersister" class="App\DataPersister\FormateurPersister" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.ApiPlatform\Core\DataPersister\DataPersisterInterface.0.App\DataPersister\ProfilSortiePersister" class="App\DataPersister\ProfilSortiePersister" autowire="true" abstract="true"/>
@@ -5746,6 +5743,8 @@
     <service id=".abstract.instanceof.App\Repository\ReferentielRepository" class="App\Repository\ReferentielRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Security\Core\Authorization\Voter\VoterInterface.0.App\Security\Voter\CompetencesVoter" class="App\Security\Voter\CompetencesVoter" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Security\Voter\CompetencesVoter" class="App\Security\Voter\CompetencesVoter" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Security\Core\Authorization\Voter\VoterInterface.0.App\Security\Voter\GroupeCompetenceVoter" class="App\Security\Voter\GroupeCompetenceVoter" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Security\Voter\GroupeCompetenceVoter" class="App\Security\Voter\GroupeCompetenceVoter" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Security\Core\Authorization\Voter\VoterInterface.0.App\Security\Voter\ProfilSortieVoter" class="App\Security\Voter\ProfilSortieVoter" autowire="true" abstract="true"/>
@@ -6096,6 +6095,10 @@
       <argument type="service" id="security.access.expression_voter"/>
       <argument type="service" id="debug.event_dispatcher"/>
     </service>
+    <service id="debug.security.voter.App\Security\Voter\CompetencesVoter" class="Symfony\Component\Security\Core\Authorization\Voter\TraceableVoter">
+      <argument type="service" id="App\Security\Voter\CompetencesVoter"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+    </service>
     <service id="debug.security.voter.App\Security\Voter\GroupeCompetenceVoter" class="Symfony\Component\Security\Core\Authorization\Voter\TraceableVoter">
       <argument type="service" id="App\Security\Voter\GroupeCompetenceVoter"/>
       <argument type="service" id="debug.event_dispatcher"/>
@@ -6361,6 +6364,7 @@
         <argument type="service" id="debug.security.voter.security.access.authenticated_voter"/>
         <argument type="service" id="debug.security.voter.security.access.role_hierarchy_voter"/>
         <argument type="service" id="debug.security.voter.security.access.expression_voter"/>
+        <argument type="service" id="debug.security.voter.App\Security\Voter\CompetencesVoter"/>
         <argument type="service" id="debug.security.voter.App\Security\Voter\GroupeCompetenceVoter"/>
         <argument type="service" id="debug.security.voter.App\Security\Voter\ProfilSortieVoter"/>
       </argument>

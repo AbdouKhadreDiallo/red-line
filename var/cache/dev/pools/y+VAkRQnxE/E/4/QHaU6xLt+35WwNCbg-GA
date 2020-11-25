@@ -10,6 +10,7 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
         clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
         clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
         clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
     ],
     null,
     [
@@ -23,6 +24,7 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                 'critereAdmission',
                 'critereEvaluation',
                 'groupeCompetence',
+                'isDeleted',
             ],
             'attributesMetadata' => [
                 [
@@ -33,6 +35,7 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                     'critereAdmission' => $o[5],
                     'critereEvaluation' => $o[6],
                     'groupeCompetence' => $o[7],
+                    'isDeleted' => $o[8],
                 ],
             ],
             'groups' => [

@@ -39,6 +39,8 @@ class GroupeCompetenceController extends AbstractController
         $groupeCompetence = new GroupeCompetence();
         if (!$this->isGranted("ADD",$groupeCompetence))
             return $this->json(["message" => "Vous n'avez pas access à cette Ressource"],Response::HTTP_FORBIDDEN);
+            
+
         $groupeComptences = $request->getContent();
         $groupeComptencesTab = $this->serializer->decode($groupeComptences,"json");
         //dd($groupeComptencesTab);
@@ -61,13 +63,6 @@ class GroupeCompetenceController extends AbstractController
                     }
                     $grpCompetenceObj->addCompetence($compet);
                 }
-                elseif (isset($competences["libelle"])){
-                    $newCompetence = new Competences();
-                    $newCompetence->setLibelle($competences["libelle"]);
-                    $this->manager->persist($newCompetence);
-                    $grpCompetenceObj->addCompetence($newCompetence);
-                }
-                
             }
         }
         $this->manager->persist($grpCompetenceObj);

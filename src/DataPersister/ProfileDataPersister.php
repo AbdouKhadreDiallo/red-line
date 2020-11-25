@@ -29,10 +29,11 @@ class ProfileDataPersister implements DataPersisterInterface
     {
         
         $data->setIsDeleted(true);
+        
         foreach ($data->getUsers() as $users) {
             $users->setIsDeleted(true);
         }
         $this->entityManager->flush();
-        dd("archivé avec succes");
+
     }
 }

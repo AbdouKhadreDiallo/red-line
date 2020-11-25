@@ -2,19 +2,64 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Niveau;
+use App\Entity\Competences;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CompetencesController extends AbstractController
 {
+    private $serializer;
+    private $validator;
+    private $manager;
+
+    public function __construct(SerializerInterface $serializer, EntityManagerInterface $manager, ValidatorInterface $validator){
+        $this->serializer = $serializer;
+        $this->validator = $validator;
+        $this->manager = $manager;
+    }
     /**
-     * @Route("/competences", name="competences")
+     * @Route("/api/competences", name="competences", methods={"POST"})
      */
-    public function index(): Response
+    public function add_competences(Request $request)
     {
-        return $this->render('competences/index.html.twig', [
-            'controller_name' => 'CompetencesController',
-        ]);
+        $newOne = new Competences();
+        if (!$this->isGranted("ADD",$newOne))
+            return $this->json(["message" => "Vous n'avez pas access à cette Ressource"],Response::HTTP_FORBIDDEN);
+        
+        $comptence = $request->getContent();
+        $competenceTab = $this->serializer->decode($comptence,"json");
+
+        // traitement groupe competences
+        if (!array_key_exists("groupeCompetences",$competenceTab) || !($competenceTab['groupeCompetences'])) {
+            return new JsonResponse("Un groupe de competence est requis",Response::HTTP_BAD_REQUEST,[],true);
+        }
+        $CompetenceObj = $this->serializer->denormalize($competenceTab,"App\Entity\Competences");
+        // traitement niveau
+        if (!array_key_exists("niveaux", $competenceTab) || !($competenceTab['niveaux'])) {
+            return new JsonResponse("il faut ajouter les niveau");
+        }
+        elseif (count($competenceTab['niveaux'])> 3) {
+            return new JsonResponse("Une comptence ne peut pas avoir plus de 3 niveaux !!!");
+        }
+        else {
+            foreach ($competenceTab['niveaux'] as $value) {
+                $niveau = new Niveau();
+                $niveau->setCritereEvaluation($value['critereEvaluation']);
+                $niveau->setGroupeAction($value['groupeAction']);
+                $this->manager->persist($niveau);
+                $CompetenceObj->addNiveau($niveau);
+            }
+        }
+
+        $this->manager->persist($CompetenceObj);
+        $this->manager->flush();
+        return new JsonResponse("Created",Response::HTTP_OK,[],true);
     }
 }

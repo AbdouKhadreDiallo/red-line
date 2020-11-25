@@ -8,7 +8,7 @@
 return [
     false, // $matchHost
     [ // $staticRoutes
-        '/competences' => [[['_route' => 'competences', '_controller' => 'App\\Controller\\CompetencesController::index'], null, null, null, false, false, null]],
+        '/api/competences' => [[['_route' => 'competences', '_controller' => 'App\\Controller\\CompetencesController::add_competences'], null, ['POST' => 0], null, false, false, null]],
         '/api/groupe_competences' => [[['_route' => 'groupe_competence', '_controller' => 'App\\Controller\\GroupeCompetenceController::addGroupeCompetences'], null, ['POST' => 0], null, false, false, null]],
         '/groupe' => [[['_route' => 'groupe', '_controller' => 'App\\Controller\\GroupeController::index'], null, null, null, false, false, null]],
         '/api/referentiels' => [

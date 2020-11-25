@@ -64,6 +64,18 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                         'security' => 'is_granted(\'ROLE_FORMATEUR\') or is_granted(\'ROLE_ADMIN\')',
                         'security_message' => 'acces non autorisé',
                     ],
+                    'edit_ref' => [
+                        'method' => 'put',
+                        'route_name' => 'edit_referentiel',
+                        'security' => 'is_granted(\'ROLE_ADMIN\') or is_granted(\'ROLE_FORMATEUR\') or is_granted(\'ROLE_CM\')',
+                        'security_message' => 'acces non autorisé',
+                    ],
+                    'delete_ref' => [
+                        'method' => 'delete',
+                        'path' => '/referentiels/{id}',
+                        'security' => 'is_granted(\'ROLE_ADMIN\') or is_granted(\'ROLE_FORMATEUR\') or is_granted(\'ROLE_CM\')',
+                        'security_message' => 'acces non autorisé',
+                    ],
                 ],
             ],
             'repositoryClass' => [
