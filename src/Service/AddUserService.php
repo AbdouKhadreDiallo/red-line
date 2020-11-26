@@ -57,6 +57,7 @@ class AddUserService {
         return new JsonResponse("Créé avec success",Response::HTTP_CREATED,[],true);
     }
 
+    // adding image
     public function uploadfile($file, $name)
     {
         $filetype = explode("/", $file->getMimeType())[1];
@@ -64,6 +65,7 @@ class AddUserService {
         return \file_get_contents($filePath, $name.'.'.$filetype);
     }
 
+    // updating user
     public function updateUser($entity, $request, $id)
     {
         $data = $request->request->all();
@@ -73,15 +75,14 @@ class AddUserService {
         }
         $avatar = $request->files->get('avatar');
 
-        // dynamiser les if/else
         
+        // dynamiser les if/else
         foreach ($data as $key => $value) {
             if ($key!= "_method") {
                 $FirstMajuscume = "set".ucfirst(strtolower($key));
                 if (method_exists($entity, $FirstMajuscume)) {
                     $refEnCours->$FirstMajuscume($value);
                 }
-
             }
         }
 

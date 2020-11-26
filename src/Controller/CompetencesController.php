@@ -6,6 +6,7 @@ use App\Entity\Niveau;
 use App\Entity\Competences;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\GroupeCompetenceRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -27,7 +28,7 @@ class CompetencesController extends AbstractController
     /**
      * @Route("/api/competences", name="competences", methods={"POST"})
      */
-    public function add_competences(Request $request)
+    public function add_competences(Request $request, GroupeCompetenceRepository $groupe_competence_repo)
     {
         $newOne = new Competences();
         if (!$this->isGranted("ADD",$newOne))
@@ -40,13 +41,30 @@ class CompetencesController extends AbstractController
         if (!array_key_exists("groupeCompetences",$competenceTab) || !($competenceTab['groupeCompetences'])) {
             return new JsonResponse("Un groupe de competence est requis",Response::HTTP_BAD_REQUEST,[],true);
         }
+
+        $groupeCompetence = isset($competenceTab['groupeCompetences']) ? $competenceTab['groupeCompetences'] : [];
+        $competenceTab['groupeCompetences'] = [];
+
         $CompetenceObj = $this->serializer->denormalize($competenceTab,"App\Entity\Competences");
+
+        // ajout dans groupe de competence
+        if($groupeCompetence){
+            foreach ($groupeCompetence as $value) {
+                if(isset($value["id"])){
+                    $groupe_compet_exist = $groupe_competence_repo->find($value["id"]);
+                    if ($groupe_compet_exist) {
+                        $CompetenceObj->addGroupeCompetence($groupe_compet_exist);
+                    }
+                    return new JsonResponse("Groupe de competence inexistant", Response::HTTP_BAD_REQUEST, [], true);
+                }
+            }
+        }
         // traitement niveau
         if (!array_key_exists("niveaux", $competenceTab) || !($competenceTab['niveaux'])) {
             return new JsonResponse("il faut ajouter les niveau");
         }
-        elseif (count($competenceTab['niveaux'])> 3) {
-            return new JsonResponse("Une comptence ne peut pas avoir plus de 3 niveaux !!!");
+        elseif (count($competenceTab['niveaux']) != 3) {
+            return new JsonResponse("Une comptence doit avoir 3 niveaux !!!");
         }
         else {
             foreach ($competenceTab['niveaux'] as $value) {

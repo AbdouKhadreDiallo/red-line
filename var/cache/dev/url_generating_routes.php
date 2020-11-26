@@ -6,6 +6,7 @@ return [
     '_preview_error' => [['code', '_format'], ['_controller' => 'error_controller::preview', '_format' => 'html'], ['code' => '\\d+'], [['variable', '.', '[^/]++', '_format', true], ['variable', '/', '\\d+', 'code', true], ['text', '/_error']], [], []],
     'competences' => [[], ['_controller' => 'App\\Controller\\CompetencesController::add_competences'], [], [['text', '/api/competences']], [], []],
     'groupe_competence' => [[], ['_controller' => 'App\\Controller\\GroupeCompetenceController::addGroupeCompetences'], [], [['text', '/api/groupe_competences']], [], []],
+    'edit_groupe_competence' => [['id'], ['_controller' => 'App\\Controller\\GroupeCompetenceController::edit_groupe_competence'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/api/groupe_competences']], [], []],
     'groupe' => [[], ['_controller' => 'App\\Controller\\GroupeController::index'], [], [['text', '/groupe']], [], []],
     'add_referentiel' => [[], ['_controller' => 'App\\Controller\\ReferentielController::add_referentiels'], [], [['text', '/api/referentiels']], [], []],
     'edit_referentiel' => [['id'], ['_controller' => 'App\\Controller\\ReferentielController::updateReferentiel', '_api_resource_class' => 'Referentiel', 'api_collection_operation_name' => 'add_referentiel'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/api/referentiels']], [], []],
