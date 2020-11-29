@@ -1,0 +1,66 @@
+<?php //App_Entity_Groupe
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Symfony\\Component\\Serializer\\Mapping\\ClassMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Serializer\\Mapping\\ClassMetadata')),
+        clone ($p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata')),
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'App\\Entity\\Groupe',
+                'id',
+                'nom',
+                'statut',
+                'Type',
+                'dateCreation',
+                'apprenants',
+                'formateurs',
+                'promo',
+                'type',
+            ],
+            'attributesMetadata' => [
+                [
+                    'id' => $o[1],
+                    'nom' => $o[2],
+                    'statut' => $o[3],
+                    'Type' => $o[4],
+                    'dateCreation' => $o[5],
+                    'apprenants' => $o[6],
+                    'formateurs' => $o[7],
+                    'promo' => $o[8],
+                    'type' => $o[9],
+                ],
+            ],
+            'groups' => [
+                2 => [
+                    'groupes:read',
+                ],
+                [
+                    'groupes:read',
+                ],
+                [
+                    'groupes:read',
+                ],
+                6 => [
+                    'groupes:read',
+                    'apprenants_in_groups:read',
+                ],
+                [
+                    'groupes:read',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

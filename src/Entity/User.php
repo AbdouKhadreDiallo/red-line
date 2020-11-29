@@ -69,6 +69,8 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups({"user:read","users_profils:read"})
      * @Assert\NotBlank(message = "L'email est requis")
+     * @Groups({"groupes:read"})
+     * @Groups({"apprenants_in_groups:read"})
      * 
      */
     private $email;
@@ -93,6 +95,8 @@ class User implements UserInterface
      * @Groups({"users:read_all"})
      * @Groups({"user:read","users_profils:read"})
      * @Assert\NotBlank(message = "Le prenom ne peut pas etre vide")
+     * @Groups({"groupes:read"})
+     * @Groups({"apprenants_in_groups:read"})
      */
     private $firstname;
 
@@ -101,6 +105,8 @@ class User implements UserInterface
      * @Groups({"users:read_all"})
      * @Groups({"user:read","users_profils:read"})
      * @Assert\NotBlank(message = "Le nom ne peut pas etre vide")
+     * @Groups({"groupes:read"})
+     * @Groups({"apprenants_in_groups:read"})
      */
     private $lastname;
 

@@ -1,0 +1,85 @@
+<?php //%255BApp%255CEntity%255CGroupe%255D%255B1%255D
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['ApiPlatform\\Core\\Annotation\\ApiResource'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Annotation\\ApiResource')),
+        clone ($p['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'collectionOperations' => [
+                [
+                    'get_groupe' => [
+                        'path' => '/admin/groupes',
+                        'method' => 'get',
+                        'normalization_context' => [
+                            'groups' => [
+                                'groupes:read',
+                            ],
+                        ],
+                        'security' => 'is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                    ],
+                    'get_apprenant_in_groupes' => [
+                        'path' => '/admin/groupes/apprenants',
+                        'method' => 'get',
+                        'normalization_context' => [
+                            'groups' => [
+                                'apprenants_in_groups:read',
+                            ],
+                        ],
+                        'security' => 'is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                    ],
+                    'add_Groupe' => [
+                        'path' => '/admin/groupes',
+                        'method' => 'post',
+                        'normalization_context' => [
+                            'groups' => [
+                                'groupes:read',
+                            ],
+                        ],
+                        'security' => 'is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                    ],
+                ],
+            ],
+            'itemOperations' => [
+                [
+                    'get_one_Groupe' => [
+                        'path' => '/admin/groupes/{id}',
+                        'method' => 'get',
+                        'normalization_context' => [
+                            'groups' => [
+                                'groupes:read',
+                            ],
+                        ],
+                        'security' => 'is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                    ],
+                    'put_groupe' => [
+                        'route_name' => 'edit_groupe',
+                        'method' => 'put',
+                        'security' => 'is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                    ],
+                    'delete_apprenant' => [
+                        'route_name' => 'delete_apprenant_in_groupe',
+                        'method' => 'delete',
+                        'security' => 'is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                    ],
+                ],
+            ],
+            'repositoryClass' => [
+                1 => 'App\\Repository\\GroupeRepository',
+            ],
+        ],
+    ],
+    [
+        $o[0],
+        $o[1],
+    ],
+    []
+); }];

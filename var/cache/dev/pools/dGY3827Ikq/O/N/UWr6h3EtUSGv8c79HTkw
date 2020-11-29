@@ -1,0 +1,30 @@
+<?php //subresource_operations_ee00d2d776b6ab84bc0fd15f14b2147d
+
+return [PHP_INT_MAX, [
+    'api_group_tags_tags_get_subresource' => [
+        'property' => 'tags',
+        'collection' => true,
+        'resource_class' => 'App\\Entity\\Tag',
+        'shortNames' => [
+            'Tag',
+            'GroupTag',
+        ],
+        'identifiers' => [
+            [
+                'id',
+                'App\\Entity\\GroupTag',
+                true,
+            ],
+        ],
+        'operation_name' => 'tags_get_subresource',
+        'route_name' => 'api_group_tags_tags_get_subresource',
+        'path' => '/group_tags/{id}/tags.{_format}',
+        'defaults' => [],
+        'requirements' => [],
+        'options' => [],
+        'host' => '',
+        'schemes' => [],
+        'condition' => '',
+        'controller' => null,
+    ],
+]];

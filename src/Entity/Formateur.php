@@ -59,11 +59,48 @@ class Formateur extends User
      */
     protected $id;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Groupe::class, mappedBy="formateurs")
+     */
+    private $groupes;
+
+    public function __construct()
+    {
+        $this->groupes = new ArrayCollection();
+    }
+
     
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return Collection|Groupe[]
+     */
+    public function getGroupes(): Collection
+    {
+        return $this->groupes;
+    }
+
+    public function addGroupe(Groupe $groupe): self
+    {
+        if (!$this->groupes->contains($groupe)) {
+            $this->groupes[] = $groupe;
+            $groupe->addFormateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGroupe(Groupe $groupe): self
+    {
+        if ($this->groupes->removeElement($groupe)) {
+            $groupe->removeFormateur($this);
+        }
+
+        return $this;
     }
 
 }

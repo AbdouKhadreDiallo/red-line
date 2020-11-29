@@ -1,0 +1,243 @@
+<?php //resource_metadata_cebfdf60abd5d0e715dbeec413b47c23
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['ApiPlatform\\Core\\Metadata\\Resource\\ResourceMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Metadata\\Resource\\ResourceMetadata')),
+    ],
+    null,
+    [
+        'ApiPlatform\\Core\\Metadata\\Resource\\ResourceMetadata' => [
+            'shortName' => [
+                'Groupe',
+            ],
+            'description' => [
+                '',
+            ],
+            'itemOperations' => [
+                [
+                    'get_one_Groupe' => [
+                        'path' => '/admin/groupes/{id}',
+                        'method' => 'GET',
+                        'normalization_context' => [
+                            'groups' => [
+                                'groupes:read',
+                            ],
+                        ],
+                        'security' => 'is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                        'input' => null,
+                        'output' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'put_groupe' => [
+                        'route_name' => 'edit_groupe',
+                        'method' => 'PUT',
+                        'security' => 'is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                        'input' => null,
+                        'output' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'delete_apprenant' => [
+                        'route_name' => 'delete_apprenant_in_groupe',
+                        'method' => 'DELETE',
+                        'security' => 'is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                        'input' => null,
+                        'output' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'collectionOperations' => [
+                [
+                    'get_groupe' => [
+                        'path' => '/admin/groupes',
+                        'method' => 'GET',
+                        'normalization_context' => [
+                            'groups' => [
+                                'groupes:read',
+                            ],
+                        ],
+                        'security' => 'is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                        'input' => null,
+                        'output' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'get_apprenant_in_groupes' => [
+                        'path' => '/admin/groupes/apprenants',
+                        'method' => 'GET',
+                        'normalization_context' => [
+                            'groups' => [
+                                'apprenants_in_groups:read',
+                            ],
+                        ],
+                        'security' => 'is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                        'input' => null,
+                        'output' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'add_Groupe' => [
+                        'path' => '/admin/groupes',
+                        'method' => 'POST',
+                        'normalization_context' => [
+                            'groups' => [
+                                'groupes:read',
+                            ],
+                        ],
+                        'security' => 'is_granted(\'ROLE_ADMIN\')',
+                        'security_message' => 'acces non autorisé',
+                        'input' => null,
+                        'output' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'graphql' => [
+                [
+                    'item_query' => [],
+                    'collection_query' => [],
+                    'delete' => [],
+                    'update' => [],
+                    'create' => [],
+                ],
+            ],
+            'attributes' => [
+                [
+                    'input' => null,
+                    'output' => null,
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

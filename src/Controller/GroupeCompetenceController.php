@@ -81,7 +81,7 @@ class GroupeCompetenceController extends AbstractController
             return $this->json(["message" => "Vous n'avez pas access à cette Ressource"],Response::HTTP_FORBIDDEN);
         
         $competence_to_edit = $competence_in_Repo->find($id);
-        if (!$id) {
+        if (!$competence_to_edit) {
             return $this->json(["message" => "Ce groupe de competence n'existe pas"],Response::HTTP_FORBIDDEN);
         }
         $data = $request->getContent();

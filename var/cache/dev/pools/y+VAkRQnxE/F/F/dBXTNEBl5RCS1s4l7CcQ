@@ -15,6 +15,7 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
         clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
         clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
         clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
     ],
     null,
     [
@@ -23,6 +24,7 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                 'App\\Entity\\Apprenant',
                 'id',
                 'profilSortie',
+                'groupes',
                 'email',
                 'roles',
                 'password',
@@ -38,37 +40,44 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                 [
                     'id' => $o[1],
                     'profilSortie' => $o[2],
-                    'email' => $o[3],
-                    'roles' => $o[4],
-                    'password' => $o[5],
-                    'profil' => $o[6],
-                    'firstname' => $o[7],
-                    'lastname' => $o[8],
-                    'avatar' => $o[9],
-                    'isDeleted' => $o[10],
-                    'username' => $o[11],
-                    'salt' => $o[12],
+                    'groupes' => $o[3],
+                    'email' => $o[4],
+                    'roles' => $o[5],
+                    'password' => $o[6],
+                    'profil' => $o[7],
+                    'firstname' => $o[8],
+                    'lastname' => $o[9],
+                    'avatar' => $o[10],
+                    'isDeleted' => $o[11],
+                    'username' => $o[12],
+                    'salt' => $o[13],
                 ],
             ],
             'groups' => [
                 1 => [
                     'user:read',
                 ],
-                3 => [
+                4 => [
                     'user:read',
                     'users_profils:read',
+                    'groupes:read',
+                    'apprenants_in_groups:read',
                 ],
-                7 => [
+                8 => [
                     'users:read_all',
                     'user:read',
                     'users_profils:read',
+                    'groupes:read',
+                    'apprenants_in_groups:read',
                 ],
                 [
                     'users:read_all',
                     'user:read',
                     'users_profils:read',
+                    'groupes:read',
+                    'apprenants_in_groups:read',
                 ],
-                10 => [
+                11 => [
                     'users:read_all',
                     'user:read',
                     'users_profils:read',
